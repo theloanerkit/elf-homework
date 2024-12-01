@@ -15,7 +15,7 @@ def write_file(fname,newfname):
         lines = [line.strip() for line in file.readlines()]
 
     # replace spaces with backticks
-    lines = [line.replace(" ","`").replace(",","~") for line in lines]
+    lines = [line.replace(" ","`").replace(",","~").replace(";","~") for line in lines]
     for i in range(len(lines)):
         if lines[i] == "":
             lines[i] = "`"

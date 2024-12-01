@@ -6,6 +6,19 @@ module string
                                 & "n","o","p","q","r","s","t","u","v","w","x","y","z"/)
     contains
 
+    function count_chars(string_len,string,chars,char_count) result (num)
+        integer :: num,string_len,char_count,i
+        character(string_len) :: string
+        character :: chars(char_count),char
+        num=0
+        do i=1,string_len
+            char = string(i:i)
+            if (any(char.eq.chars)) then
+                num = num+1
+            end if
+        end do
+    end function count_chars
+
     function ints_from_str(count,string,len) result (nums)
         integer :: count, len, i, idx(1), temp_num,j
         integer :: nums(count)
@@ -27,11 +40,38 @@ module string
                 end if
                 temp_num = 0
             end if
+            if (j.gt.count) then
+                exit
+            end if
         end do
         if (j.eq.count) then
             nums(j) = temp_num
         end if
     end function ints_from_str
+
+    function digits_from_str(count,string,len) result (nums)
+        integer :: count, len, i, idx(1), temp_num,j
+        integer :: nums(count)
+        character(len) :: string
+        character :: char
+        temp_num = 0
+        j = 1
+        nums=-1
+        do i=1,len
+            char = string(i:i)
+            idx = findloc(str_digits,char)
+            if (idx(1).ne.0) then
+                nums(j) = digits(idx(1))
+                j=j+1
+            end if
+            if (j.gt.count) then
+                exit
+            end if
+        end do
+        if (j.eq.count) then
+            nums(j) = temp_num
+        end if
+    end function digits_from_str
 
     function str_to_int(string,len) result (num)
         integer :: len,num,i,idx(1)
@@ -45,18 +85,18 @@ module string
         end do
     end function str_to_int
 
-    function count_chars(string, char, len) result (count)
-        integer :: len, count, i
-        character :: char, test
-        character(len) :: string
-        count = 0
-        do i=1,len
-            test = string(i:i)
-            if (test.eq.char) then
-                count = count + 1
-            end if
-        end do
-    end function count_chars
+    !function count_chars(string, char, len) result (count)
+    !    integer :: len, count, i
+    !    character :: char, test
+    !    character(len) :: string
+    !    count = 0
+    !    do i=1,len
+    !        test = string(i:i)
+    !        if (test.eq.char) then
+    !           count = count + 1
+    !        end if
+    !    end do
+    !end function count_chars
 
     function char_idx(char) result (i)
         character :: char
@@ -64,5 +104,14 @@ module string
         idx = findloc(alphabet,char)
         i = idx(1)
     end function char_idx
+
+    function reverse(string,len) result(gnirts)
+        integer :: len
+        character(len) :: string,gnirts
+        integer :: i
+        do i=1,len
+            gnirts(len-i+1:len-i+1)=string(i:i)
+        end do
+    end function reverse
 
 end module string
