@@ -1,5 +1,9 @@
+*
+!*/
+!*.*
 /inputs/*
 /test_inputs/*
-/fortan/*.mod
+/fortran/*.mod
 /fortran/*.o
+/fortran/*.out
 *.txt
