@@ -1,0 +1,5 @@
+/inputs/*
+/test_inputs/*
+/fortan/*.mod
+/fortran/*.o
+*.txt
