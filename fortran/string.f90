@@ -34,18 +34,18 @@ module string
                 temp_num = temp_num*10
                 temp_num = temp_num + digits(idx(1))
             else
-                nums(j) = temp_num
                 if(temp_num.ne.0) then
+                    nums(j)=temp_num
                     j = j+1
+                    temp_num = 0
                 end if
-                temp_num = 0
             end if
             if (j.gt.count) then
                 exit
             end if
         end do
-        if (j.eq.count) then
-            nums(j) = temp_num
+        if (temp_num.ne.0) then
+            nums(j)=temp_num
         end if
     end function ints_from_str
 

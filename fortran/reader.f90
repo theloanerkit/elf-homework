@@ -16,6 +16,7 @@ module reader
         integer :: file_len, line_len, columns, i
         integer :: nums(file_len,columns)
         character(line_len) :: line
+        nums=-1
         do i=1,file_len
             read(1,*) line
             nums(i,:) = ints_from_str(columns,line,line_len)
