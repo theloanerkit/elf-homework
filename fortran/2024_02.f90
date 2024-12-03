@@ -1,4 +1,4 @@
-program day02
+program red_nosed_reports
     use reader
     use list
     implicit none
@@ -78,4 +78,4 @@ program day02
             end do
         end do
     end subroutine part2
-end program day02
+end program red_nosed_reports

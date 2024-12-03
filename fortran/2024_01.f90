@@ -1,4 +1,4 @@
-program day01
+program historian_hysteria
     use reader
     use string
     implicit none
@@ -58,4 +58,4 @@ program day01
             ans2 = ans2 + (ints(i,1)*times)
         end do
     end subroutine part2
-end program day01
+end program historian_hysteria
