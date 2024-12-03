@@ -6,6 +6,19 @@ module string
                                 & "n","o","p","q","r","s","t","u","v","w","x","y","z"/)
     contains
 
+    function find(string,string_len,char) result (idx)
+        integer :: idx,string_len,i
+        character(string_len) :: string
+        character :: char
+        idx=-1
+        do i=1,string_len
+            if (string(i:i).eq.char) then
+                idx=i
+                exit
+            end if
+        end do
+    end function find
+
     function count_chars(string_len,string,chars,char_count) result (num)
         integer :: num,string_len,char_count,i
         character(string_len) :: string
