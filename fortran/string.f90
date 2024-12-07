@@ -1,10 +1,12 @@
 module string
+    use types
     implicit none
     integer :: digits(10) = (/0,1,2,3,4,5,6,7,8,9/)
     character :: str_digits(10) = (/"0","1","2","3","4","5","6","7","8","9"/)
     character :: alphabet(26) = (/"a","b","c","d","e","f","g","h","i","j","k","l","m", &
                                 & "n","o","p","q","r","s","t","u","v","w","x","y","z"/)
-    contains
+    integer,parameter :: ks=selected_int_kind(12)
+                                contains
 
     function find(string,string_len,char) result (idx)
         integer :: idx,string_len,i
@@ -33,25 +35,28 @@ module string
     end function count_chars
 
     function ints_from_str(count,string,len) result (nums)
-        integer :: count, len, i, idx(1), temp_num,j
-        integer :: nums(count)
+        integer :: count, len, i, idx(1), j
+        integer(kind=k12) :: nums(count),temp_num
         character(len) :: string
         character :: char
+        logical :: new
+        new=.false.
         temp_num = 0
         j = 1
         nums=-1
         do i=1,len
+            
             char = string(i:i)
             idx = findloc(str_digits,char)
             if (idx(1).ne.0) then
                 temp_num = temp_num*10
                 temp_num = temp_num + digits(idx(1))
-            else
-                if(temp_num.ne.0) then
-                    nums(j)=temp_num
-                    j = j+1
-                    temp_num = 0
-                end if
+                new=.true.
+            else if (new) then
+                nums(j)=temp_num
+                j = j+1
+                temp_num = 0
+                new=.false.
             end if
             if (j.gt.count) then
                 exit
@@ -60,6 +65,7 @@ module string
         if (temp_num.ne.0) then
             nums(j)=temp_num
         end if
+        !print*,nums
     end function ints_from_str
 
     function digits_from_str(count,string,len) result (nums)
