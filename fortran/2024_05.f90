@@ -1,4 +1,4 @@
-program day05
+program print_queue
     use reader
     implicit none
     integer :: file_len, line_len
@@ -233,4 +233,4 @@ program day05
             end if
         end do
     end subroutine part2
-end program day05
+end program print_queue
